@@ -1,0 +1,19 @@
+Package: tSpaceMATLAB
+Type: Package
+Title: R interface for the MATLAB implementation of the tSpace algorithm
+Version: 0.1.0
+Authors@R: c(person("Kevin", "Brulois", role = c("aut", "cre"), 
+        email = "kevin.brulois@gmail.com")) 
+Maintainer: Kevin Brulois <kevin.brulois@gmail.com>
+Description: This is an interface to the matlab implementation of the tSpace algorithm described in Dermadi et al, modified for improved error handling. 
+License: GPL (>= 2)
+Imports:
+	data.table
+Suggests:
+	scran,
+	batchelor,
+	ggplot2
+Depends: R (>= 3.3.0)
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.0
