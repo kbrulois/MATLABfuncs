@@ -1,11 +1,11 @@
-Package: tSpaceMATLAB
+Package: MATLABfuncs
 Type: Package
-Title: R interface for the MATLAB implementation of the tSpace algorithm
+Title: R interface for the MATLAB implementation of the tSpace and wanderlust algorithms
 Version: 0.1.0
 Authors@R: c(person("Kevin", "Brulois", role = c("aut", "cre"), 
         email = "kevin.brulois@gmail.com")) 
 Maintainer: Kevin Brulois <kevin.brulois@gmail.com>
-Description: This is an interface to the matlab implementation of the tSpace algorithm described in Dermadi et al, modified for improved error handling. 
+Description: This is an interface to the matlab implementation of the tSpace algorithm described in Dermadi et al, modified for improved error handling and the wanderlust algorithm described in Bendall et al. 
 License: GPL (>= 2)
 Imports:
 	data.table
