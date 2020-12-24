@@ -83,7 +83,7 @@ run_tSpace = function(data,
   l <- l[order(l)]
   if(l != "auto") {assertthat::are_equal(length(k), length(l))}
   
-  pkg_ml_path <- system.file("exec", package="tSpaceMATLAB")
+  pkg_ml_path <- system.file("exec", package="MATLABfuncs")
   
   while(is.error & iter <= length(k)) {
     is.error <- tryCatch({
@@ -93,7 +93,7 @@ run_tSpace = function(data,
       mat4 = paste0("-r", " ", "\'addpath(genpath(\"", matlab_path, "\"), genpath(\"", pkg_ml_path,"\"));", " ","try; tspace_ml(", tSpaceParms, ");", " ", "catch;" , " ", "end;", " ", "quit\'")
       args = c(mat1, mat2, mat3, mat4)
       output = system2(matlab_command, args= args, stdout=TRUE)
-      #print(output)
+      print(output)
       !file.exists(path2tSpaceOutput)
       
     }, error=function(e) TRUE)
@@ -215,7 +215,7 @@ runWanderlust = function(data,
   iter <- 1
   k <- k[order(k)]
   l <- l[order(l)]
-  pkg_ml_path <- system.file("exec", package="tSpaceMATLAB")
+  pkg_ml_path <- system.file("exec", package="MATLABfuncs")
   
   while(is.error & iter <= length(k)) {
     is.error <- tryCatch({
@@ -225,7 +225,7 @@ runWanderlust = function(data,
       mat4 = paste0("-r", " ", "\'addpath(genpath(\"", matlab_path, "\"), genpath(\"", pkg_ml_path,"\"));", " ","try; runWanderlust(", tSpaceParms, ");", " ", "catch;" , " ", "end;", " ", "quit\'")
       args = c(mat1, mat2, mat3, mat4)
       output = system2(matlab_command, args= args, stdout=TRUE)
-      #print(paste(output))
+      print(paste(output))
       
       !file.exists(path2wlOutput)
       
