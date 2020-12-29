@@ -8,7 +8,7 @@ Maintainer: Kevin Brulois <kevin.brulois@gmail.com>
 Description: This is an interface to the matlab implementation of the tSpace algorithm described in Dermadi et al, modified for improved error handling and the wanderlust algorithm described in Bendall et al. 
 License: GPL (>= 2)
 Imports:
-	data.table
+	data.table,
 	gtools
 Suggests:
 	scran,
