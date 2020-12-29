@@ -35,7 +35,7 @@ run_tSpace(
 
 \item{voting_scheme}{Arugment passed to wanderlust.}
 
-\item{label}{A character string to be incorporated into the tSpace column labels. Default is nothing.}
+\item{label}{A character string to be incorporated into the tSpace column labels. Default is an empty label.}
 
 \item{matlab_version}{A character string specifying the active matlab version (e.g. "R2019a"). If set to "auto," the latest version of matlab will be used. Only works for mac users.}
 

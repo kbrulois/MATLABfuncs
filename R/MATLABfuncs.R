@@ -42,7 +42,9 @@ run_tSpace = function(data,
       Sys.unsetenv(c("tsp_distMetric",
                      "tsp_voting_scheme",
                      "path2tSpaceInput",
-                     "path2tSpaceOutput"))})
+                     "path2tSpaceOutput",
+                     "path2tSpaceOutput2",
+                     "path2tSpaceOutput3"))})
     print(paste("done") )})
   
   tsp.dist.lut <- data.frame(ml = c("euclidean", "correlation", "cityblock", "chebyshev", "minkowski", "hamming", "mahalanobis", "jaccard", "cosine", "spearman"),
@@ -66,10 +68,18 @@ run_tSpace = function(data,
   path2tSpaceOutput <- tempfile("tsp_out", fileext = ".csv")
   to.remove <- c(to.remove, path2tSpaceOutput)
   
+  path2tSpaceOutput2 <- tempfile("tsp_out2", fileext = ".csv")
+  to.remove <- c(to.remove, path2tSpaceOutput2)
+  
+  path2tSpaceOutput3 <- tempfile("tsp_out2", fileext = ".csv")
+  to.remove <- c(to.remove, path2tSpaceOutput2)
+  
   Sys.setenv(tsp_distMetric = metric,
              tsp_voting_scheme = voting_scheme,
              path2tSpaceInput = path2tSpaceInput,
-             path2tSpaceOutput = path2tSpaceOutput)
+             path2tSpaceOutput = path2tSpaceOutput,
+             path2tSpaceOutput2 = path2tSpaceOutput2,
+             path2tSpaceOutput3 = path2tSpaceOutput3)
   
   data.table::fwrite(as.data.frame(data), file = path2tSpaceInput, row.names = FALSE)
   
@@ -103,6 +113,9 @@ run_tSpace = function(data,
   }
   
   flug1 <- data.table::fread(path2tSpaceOutput, header = FALSE)
+  tpc_labels <- read.csv(path2tSpaceOutput2, header = FALSE)[[1]][1:20]
+  ppc_labels <- read.csv(path2tSpaceOutput3, header = FALSE)[[1]][1:20]
+  
   
   flug1 <- as.matrix(flug1)
   rownames(flug1) <- rownames(data)
@@ -133,9 +146,9 @@ run_tSpace = function(data,
   
   bcs <- readRDS(bcs_path)
   
-  colnames(L$tPCs) <- c(paste0("tPC", label, "|", tsp.p, "|", bcs[1]), paste0(bcs[1], 2:20))
+  colnames(L$tPCs) <- c(paste0("tPC", label, "|", tsp.p, "|", bcs[1], "_", tpc_labels[1]), paste0(bcs[1], 2:20, "_", tpc_labels[2:20]))
   colnames(L$traj) <- c(paste0("traj", label, "|", tsp.p, "|", bcs[3]), paste0(bcs[3], 2:trajectories))
-  colnames(L$pPCA) <- c(paste0("pPC", label, "|", tsp.p, "|", bcs[4]), paste0(bcs[4], 2:20))
+  colnames(L$pPCA) <- c(paste0("pPC", label, "|", tsp.p, "|", bcs[4], "_", ppc_labels[1]), paste0(bcs[4], 2:20, "_", ppc_labels[2:20]))
   
   saveRDS(bcs[-c(1:4)], bcs_path)
   

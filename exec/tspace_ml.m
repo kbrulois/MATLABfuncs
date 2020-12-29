@@ -1,4 +1,4 @@
-function [allData, tspacem, megaMat] = tspace_pipe(k, l, graph, num_landmarks, tspace_tsne, numPop, perplexity)
+function [allData, tspacem, megaMat] = tspace_ml(k, l, graph, num_landmarks, tspace_tsne, numPop, perplexity)
 %data = expression matrix
 %k, k in knn
 %l, l out of k (l < k)
@@ -212,6 +212,6 @@ rng(1); % For reproducibility
     %file with megaMat (sessionData, kMeans, pca on wanderlusts)
     megaMat = cat(2,index, clusters_trajectories, tScore);
     csvwrite(getenv('path2tSpaceOutput'), allData)
-    %csvwrite(strcat(getenv('GROUP_HOME'), '/programs/MATLAB/tmp/tspace_pipe_output2.csv'), tExplain)
+    csvwrite(getenv('path2tSpaceOutput2'), tExplain)
 end
 
