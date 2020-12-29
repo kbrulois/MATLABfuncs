@@ -11,7 +11,7 @@
 #' @param graphs Number of graphs over which to average trajectories (wanderlust).
 #' @param landmarks Number of landmarks (wanderlust). 
 #' @param voting_scheme Arugment passed to wanderlust. 
-#' @param label A character string to be incorporated into the tSpace column labels. Default is nothing.
+#' @param label A character string to be incorporated into the tSpace column labels. Default is an empty label.
 #' @param matlab_version A character string specifying the active matlab version (e.g. "R2019a"). If set to "auto," the latest version of matlab will be used. Only works for mac users.
 #' @param matlab_path The path to the MATLAB folder containing cyt and tSpace scripts.
 #' @return A \code{list} that includes the following elements:
