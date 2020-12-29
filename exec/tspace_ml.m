@@ -40,7 +40,8 @@ clusters_trajectories = kmeans(sessionData, numPop, 'MaxIter', 10000); % 'Option
 %run PCA on sessionData
 rng(1); % For reproducibility
 
-[pScore, pExplained] = pca(sessionData,'NumComponents', 20);
+[pCoeff, pScore, pLatent, pTsquared, pExplained, pMu] = pca(sessionData,'NumComponents', 20);
+        pExplain = round(pExplained, 2);
 
 
 perplex = parameters.perplex;
@@ -207,11 +208,12 @@ rng(1); % For reproducibility
         index(i,1) = i;
     end
     
-    allData = cat(2,index,pExplained, clusters_trajectories, tScore, tspacem);
+    allData = cat(2,index,pScore, clusters_trajectories, tScore, tspacem);
 
     %file with megaMat (sessionData, kMeans, pca on wanderlusts)
     megaMat = cat(2,index, clusters_trajectories, tScore);
     csvwrite(getenv('path2tSpaceOutput'), allData)
     csvwrite(getenv('path2tSpaceOutput2'), tExplain)
+    csvwrite(getenv('path2tSpaceOutput3'), pExplain)
 end
 

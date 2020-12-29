@@ -71,8 +71,8 @@ run_tSpace = function(data,
   path2tSpaceOutput2 <- tempfile("tsp_out2", fileext = ".csv")
   to.remove <- c(to.remove, path2tSpaceOutput2)
   
-  path2tSpaceOutput3 <- tempfile("tsp_out2", fileext = ".csv")
-  to.remove <- c(to.remove, path2tSpaceOutput2)
+  path2tSpaceOutput3 <- tempfile("tsp_out3", fileext = ".csv")
+  to.remove <- c(to.remove, path2tSpaceOutput3)
   
   Sys.setenv(tsp_distMetric = metric,
              tsp_voting_scheme = voting_scheme,
