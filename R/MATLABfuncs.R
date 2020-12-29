@@ -90,10 +90,10 @@ run_tSpace = function(data,
       message("Trying tspace with k = ", k[iter])
       if(l == "auto") {l_param <- (2*k[iter]) %/% 3} else {l_param <- l[iter]}
       tSpaceParms = paste(k[iter], l_param, graphs, landmarks, 1, trajectories, 30, sep = ",")
-      mat4 = paste0("-r", " ", "\'addpath(genpath(\"", matlab_path, "\"), genpath(\"", pkg_ml_path,"\"));", " ","try; tspace_ml(", tSpaceParms, ");", " ", "catch;" , " ", "end;", " ", "quit\'")
+      mat4 = paste0("-r", " ", "\'addpath(genpath(\"", pkg_ml_path,"\"), genpath(\"", matlab_path, "\"));", " ","try; tspace_ml(", tSpaceParms, ");", " ", "catch;" , " ", "end;", " ", "quit\'")
       args = c(mat1, mat2, mat3, mat4)
       output = system2(matlab_command, args= args, stdout=TRUE)
-      print(output)
+      #print(output)
       !file.exists(path2tSpaceOutput)
       
     }, error=function(e) TRUE)
@@ -118,25 +118,26 @@ run_tSpace = function(data,
             clusters = flug1[,22], 
             pPCA = flug1[,2:21])
   
-  if(!file.exists("~/.bcs.rds")) {
+  bcs_path <- paste0(system.file("exec", package="MATLABfuncs"), "/.bcs.rds")
+  if(!file.exists(bcs_path)) {
     bcs <- c(unique(replicate(10000, tolower(paste0(sample(LETTERS, 3, replace = FALSE), collapse = "")))),
              unique(replicate(10000, tolower(paste0(sample(LETTERS, 4, replace = FALSE), collapse = "")))))
-    saveRDS(bcs, "~/.bcs.rds")
+    saveRDS(bcs, bcs_path)
   }
   
-  if(length(readRDS("~/.bcs.rds")) < 20) {
+  if(length(readRDS(bcs_path)) < 20) {
     bcs <- c(unique(replicate(10000, tolower(paste0(sample(LETTERS, 3, replace = FALSE), collapse = "")))),
              unique(replicate(10000, tolower(paste0(sample(LETTERS, 4, replace = FALSE), collapse = "")))))
-    saveRDS(bcs, "~/.bcs.rds")
+    saveRDS(bcs, bcs_path)
   }
   
-  bcs <- readRDS("~/.bcs.rds")
+  bcs <- readRDS(bcs_path)
   
   colnames(L$tPCs) <- c(paste0("tPC", label, "|", tsp.p, "|", bcs[1]), paste0(bcs[1], 2:20))
   colnames(L$traj) <- c(paste0("traj", label, "|", tsp.p, "|", bcs[3]), paste0(bcs[3], 2:trajectories))
   colnames(L$pPCA) <- c(paste0("pPC", label, "|", tsp.p, "|", bcs[4]), paste0(bcs[4], 2:20))
   
-  saveRDS(bcs[-c(1:4)], "~/.bcs.rds")
+  saveRDS(bcs[-c(1:4)], bcs_path)
   
   return(L)
   
@@ -230,7 +231,7 @@ runWanderlust = function(data,
       mat4 = paste0("-r", " ", "\'addpath(genpath(\"", matlab_path, "\"), genpath(\"", pkg_ml_path,"\"));", " ","try; runWanderlust(", tSpaceParms, ");", " ", "catch;" , " ", "end;", " ", "quit\'")
       args = c(mat1, mat2, mat3, mat4)
       output = system2(matlab_command, args= args, stdout=TRUE)
-      print(paste(output))
+      #print(paste(output))
       
       !file.exists(path2wlOutput)
       
