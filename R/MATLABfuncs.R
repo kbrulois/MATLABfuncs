@@ -118,11 +118,16 @@ run_tSpace = function(data,
             clusters = flug1[,22], 
             pPCA = flug1[,2:21])
   
-  if(!file.exists("~/.bcs.rds") | length(readRDS("~/.bcs.rds")) < 20) {
+  if(!file.exists("~/.bcs.rds")) {
     bcs <- c(unique(replicate(10000, tolower(paste0(sample(LETTERS, 3, replace = FALSE), collapse = "")))),
              unique(replicate(10000, tolower(paste0(sample(LETTERS, 4, replace = FALSE), collapse = "")))))
     saveRDS(bcs, "~/.bcs.rds")
-    
+  }
+  
+  if(length(readRDS("~/.bcs.rds")) < 20) {
+    bcs <- c(unique(replicate(10000, tolower(paste0(sample(LETTERS, 3, replace = FALSE), collapse = "")))),
+             unique(replicate(10000, tolower(paste0(sample(LETTERS, 4, replace = FALSE), collapse = "")))))
+    saveRDS(bcs, "~/.bcs.rds")
   }
   
   bcs <- readRDS("~/.bcs.rds")
