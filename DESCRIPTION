@@ -9,6 +9,7 @@ Description: This is an interface to the matlab implementation of the tSpace alg
 License: GPL (>= 2)
 Imports:
 	data.table
+	gtools
 Suggests:
 	scran,
 	batchelor,
