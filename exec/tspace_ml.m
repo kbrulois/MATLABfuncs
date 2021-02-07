@@ -39,10 +39,10 @@ clusters_trajectories = kmeans(sessionData, numPop, 'MaxIter', 10000); % 'Option
 
 %run PCA on sessionData
 rng(1); % For reproducibility
-    if (size(tspacem,2) >30)
+    if (size(sessionData,2) >30)
         [pCoeff, pScore, pLatent, pTsquared, pExplained, pMu] = pca(sessionData,'NumComponents', 20);
         pExplain = round(pExplained, 2);
-    elseif (size(tspacem,2) <= 30)
+    elseif (size(sessionData,2) <= 30)
         [pCoeff, pScore, pLatent, pTsquared, pExplained, pMu] = pca(sessionData,'NumComponents', round(size(tspacem,2)/2));
         pExplain = round(pExplained, 2);
     end
