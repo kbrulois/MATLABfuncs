@@ -43,7 +43,7 @@ rng(1); % For reproducibility
         [pCoeff, pScore, pLatent, pTsquared, pExplained, pMu] = pca(sessionData,'NumComponents', 20);
         pExplain = round(pExplained, 2);
     elseif (size(sessionData,2) <= 30)
-        [pCoeff, pScore, pLatent, pTsquared, pExplained, pMu] = pca(sessionData,'NumComponents', round(size(tspacem,2)/2));
+        [pCoeff, pScore, pLatent, pTsquared, pExplained, pMu] = pca(sessionData,'NumComponents', round(size(sessionData,2)/2));
         pExplain = round(pExplained, 2);
     end
 perplex = parameters.perplex;
