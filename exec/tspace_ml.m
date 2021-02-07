@@ -39,11 +39,13 @@ clusters_trajectories = kmeans(sessionData, numPop, 'MaxIter', 10000); % 'Option
 
 %run PCA on sessionData
 rng(1); % For reproducibility
-
-[pCoeff, pScore, pLatent, pTsquared, pExplained, pMu] = pca(sessionData,'NumComponents', 20);
+    if (size(tspacem,2) >30)
+        [pCoeff, pScore, pLatent, pTsquared, pExplained, pMu] = pca(sessionData,'NumComponents', 20);
         pExplain = round(pExplained, 2);
-
-
+    elseif (size(tspacem,2) <= 30)
+        [pCoeff, pScore, pLatent, pTsquared, pExplained, pMu] = pca(sessionData,'NumComponents', round(size(tspacem,2)/2));
+        pExplain = round(pExplained, 2);
+    end
 perplex = parameters.perplex;
 theta = 0.3;
 rng(1); % For reproducibility
@@ -184,11 +186,11 @@ rng(1); % For reproducibility
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %run pca on tspaces
     rng(1); % For reproducibility
-    if (size(tspacem,2) >20)
+    if (size(tspacem,2) > 30)
         [tCoeff, tScore, tLatent, tTsquared, tExplained, tMu] = pca(tspacem,'NumComponents', 20);
         tExplain = round(tExplained, 2);
-    elseif (size(tspacem,2) <= 20)
-        [tCoeff, tScore, tLatent, tTsquared, tExplained, tMu] = pca(tspacem,'NumComponents', 10);
+    elseif (size(tspacem,2) <= 30)
+        [tCoeff, tScore, tLatent, tTsquared, tExplained, tMu] = pca(tspacem,'NumComponents', round(size(tspacem)/2));
         tExplain = round(tExplained, 2);
     end
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
