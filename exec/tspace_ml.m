@@ -190,7 +190,7 @@ rng(1); % For reproducibility
         [tCoeff, tScore, tLatent, tTsquared, tExplained, tMu] = pca(tspacem,'NumComponents', 20);
         tExplain = round(tExplained, 2);
     elseif (size(tspacem,2) <= 40)
-        [tCoeff, tScore, tLatent, tTsquared, tExplained, tMu] = pca(tspacem,'NumComponents', round(size(tspacem)/2));
+        [tCoeff, tScore, tLatent, tTsquared, tExplained, tMu] = pca(tspacem,'NumComponents', round(size(tspacem,2)/2));
         tExplain = round(tExplained, 2);
     end
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
