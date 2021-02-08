@@ -130,7 +130,7 @@ run_tSpace = function(data,
                   "L", landmarks)
   
   L <- list(tPCs = flug1[,(ppc_num + 3):(ppc_num + tpc_num + 2)], 
-            traj = flug1[,(ppc_num + tpc_num + 4):ncol(flug1)], 
+            traj = flug1[,(ppc_num + tpc_num + 3):ncol(flug1)], 
             clusters = flug1[,ppc_num + 2], 
             pPCA = flug1[,2:(ppc_num + 1)])
   
