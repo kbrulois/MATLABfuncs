@@ -112,9 +112,12 @@ run_tSpace = function(data,
     
   }
   
+  ppc_num <- ifelse(ncol(data) > 40, 20, ceiling(ncol(data)/2))
+  tpc_num <- ifelse(trajectories > 40, 20, ceiling(trajectories/2))
+  
   flug1 <- data.table::fread(path2tSpaceOutput, header = FALSE)
-  tpc_labels <- read.csv(path2tSpaceOutput2, header = FALSE)[[1]][1:20]
-  ppc_labels <- read.csv(path2tSpaceOutput3, header = FALSE)[[1]][1:20]
+  tpc_labels <- read.csv(path2tSpaceOutput2, header = FALSE)[[1]][1:tpc_num]
+  ppc_labels <- read.csv(path2tSpaceOutput3, header = FALSE)[[1]][1:ppc_num]
   
   
   flug1 <- as.matrix(flug1)
@@ -126,10 +129,10 @@ run_tSpace = function(data,
                   "G", graphs,
                   "L", landmarks)
   
-  L <- list(tPCs = flug1[,23:42], 
-            traj = flug1[,43:ncol(flug1)], 
-            clusters = flug1[,22], 
-            pPCA = flug1[,2:21])
+  L <- list(tPCs = flug1[,(ppc_num + 3):(ppc_num + tpc_num + 3)], 
+            traj = flug1[,(ppc_num + tpc_num + 4):ncol(flug1)], 
+            clusters = flug1[,ppc_num + 2], 
+            pPCA = flug1[,2:(ppc_num + 1)])
   
   bcs_path <- paste0(system.file("exec", package="MATLABfuncs"), "/.bcs.rds")
   if(!file.exists(bcs_path)) {
@@ -146,9 +149,9 @@ run_tSpace = function(data,
   
   bcs <- readRDS(bcs_path)
   
-  colnames(L$tPCs) <- c(paste0("tPC", label, "|", tsp.p, "|", bcs[1], "_", tpc_labels[1]), paste0(bcs[1], 2:20, "_", tpc_labels[2:20]))
+  colnames(L$tPCs) <- c(paste0("tPC", label, "|", tsp.p, "|", bcs[1], "_", tpc_labels[1]), paste0(bcs[1], 2:tpc_num, "_", tpc_labels[2:tpc_num]))
   colnames(L$traj) <- c(paste0("traj", label, "|", tsp.p, "|", bcs[3]), paste0(bcs[3], 2:trajectories))
-  colnames(L$pPCA) <- c(paste0("pPC", label, "|", tsp.p, "|", bcs[4], "_", ppc_labels[1]), paste0(bcs[4], 2:20, "_", ppc_labels[2:20]))
+  colnames(L$pPCA) <- c(paste0("pPC", label, "|", tsp.p, "|", bcs[4], "_", ppc_labels[1]), paste0(bcs[4], 2:ppc_num, "_", ppc_labels[2:ppc_num]))
   
   saveRDS(bcs[-c(1:4)], bcs_path)
   

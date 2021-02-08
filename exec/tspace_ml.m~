@@ -186,10 +186,10 @@ rng(1); % For reproducibility
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %run pca on tspaces
     rng(1); % For reproducibility
-    if (size(tspacem,2) > 40)
+    if (size(tspacem,2) > 30)
         [tCoeff, tScore, tLatent, tTsquared, tExplained, tMu] = pca(tspacem,'NumComponents', 20);
         tExplain = round(tExplained, 2);
-    elseif (size(tspacem,2) <= 40)
+    elseif (size(tspacem,2) <= 30)
         [tCoeff, tScore, tLatent, tTsquared, tExplained, tMu] = pca(tspacem,'NumComponents', round(size(tspacem)/2));
         tExplain = round(tExplained, 2);
     end
