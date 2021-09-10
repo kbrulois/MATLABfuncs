@@ -35,6 +35,7 @@ run_tSpace = function(data,
                   voting_scheme = "exponential",
                   label = "",
                   matlab_version = "auto",
+                  matlab_command = NULL,
                   matlab_path = "~/Documents/MATLAB") {
   
   on.exit({print(paste("removing temporary files"))
@@ -60,7 +61,9 @@ run_tSpace = function(data,
   if(matlab_version == "auto") {
     matlab_version <- getMatlabVersion()
   }
+  if(!is.null(matlab_command)) {
   matlab_command <- paste0("/Applications/MATLAB_", matlab_version, ".app/bin/matlab")
+  }
   
   path2tSpaceInput <- tempfile("tsp_in", fileext = ".csv")
   to.remove <- path2tSpaceInput
@@ -187,6 +190,7 @@ runWanderlust = function(data,
                          landmarks = 20,
                          voting_scheme = "exponential",
                          matlab_version = "auto",
+                         matlab_command = NULL,
                          matlab_path = "~/Documents/MATLAB") {
   
   on.exit({print(paste("removing temporary files"))
@@ -210,7 +214,9 @@ runWanderlust = function(data,
   if(matlab_version == "auto") {
     matlab_version <- getMatlabVersion()
   }
-  matlab_command <- paste0("/Applications/MATLAB_", matlab_version, ".app/bin/matlab")
+  if(!is.null(matlab_command)) {
+    matlab_command <- paste0("/Applications/MATLAB_", matlab_version, ".app/bin/matlab")
+  }
   
   path2wlInput <- tempfile("wl_in", fileext = ".csv")
   to.remove <- path2wlInput
