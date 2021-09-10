@@ -253,7 +253,7 @@ runWanderlust = function(data,
       mat4 = paste0("-r", " ", "\'addpath(genpath(\"", matlab_path, "\"), genpath(\"", pkg_ml_path,"\"));", " ","try; runWanderlust(", tSpaceParms, ");", " ", "catch;" , " ", "end;", " ", "quit\'")
       args = c(mat1, mat2, mat3, mat4)
       output = system2(matlab_command, args= args, stdout=TRUE)
-      #print(paste(output))
+      print(paste(output))
       
       !file.exists(path2wlOutput)
       
