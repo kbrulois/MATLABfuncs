@@ -250,7 +250,7 @@ runWanderlust = function(data,
       message("Trying wanderlust with k = ", k[iter])
       if(l == "auto") {l_param <- (2*k[iter]) %/% 3} else {l_param <- l[iter]}
       tSpaceParms = paste(k[iter], l_param, s, graphs, landmarks, sep = ",")
-      mat4 = paste0("-r", " ", "\'addpath(genpath(\"", matlab_path, "\"), genpath(\"", pkg_ml_path,"\"));", " ","try; runWanderlust(", tSpaceParms, ");", " ", "catch;" , " ", "end;", " ", "quit\'")
+      mat4 = paste0("-r", " ", "\'addpath(genpath(\"", pkg_ml_path, "\"), genpath(\"", matlab_path,"\"));", " ","try; runWanderlust(", tSpaceParms, ");", " ", "catch;" , " ", "end;", " ", "quit\'")
       args = c(mat1, mat2, mat3, mat4)
       output = system2(matlab_command, args= args, stdout=TRUE)
       print(paste(output))
