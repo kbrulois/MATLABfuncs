@@ -61,7 +61,7 @@ run_tSpace = function(data,
   if(matlab_version == "auto") {
     matlab_version <- getMatlabVersion()
   }
-  if(!is.null(matlab_command)) {
+  if(is.null(matlab_command)) {
   matlab_command <- paste0("/Applications/MATLAB_", matlab_version, ".app/bin/matlab")
   }
   
@@ -214,7 +214,7 @@ runWanderlust = function(data,
   if(matlab_version == "auto") {
     matlab_version <- getMatlabVersion()
   }
-  if(!is.null(matlab_command)) {
+  if(is.null(matlab_command)) {
     matlab_command <- paste0("/Applications/MATLAB_", matlab_version, ".app/bin/matlab")
   }
   
